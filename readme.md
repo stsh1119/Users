@@ -8,3 +8,11 @@ Technologies: Python, SQLlite
 - Develop functionality for selecting statistics data (users_statistic table)
 using **user id** with ability to **filter results by date** ("from" and "till" will be receieved from request)
 - All data coming from Front-end should be validated and suit certain format
+
+#### The API is deployed to [Heroku](https://cryptic-dusk-09256.herokuapp.com)
+
+Usage examples:
+
+/api/v1/get_user_stats?id=5&from=2019-10-05&to=2019-10-20
+
+/api/v1/fetch_users?amount=3&page=1
