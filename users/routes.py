@@ -35,3 +35,16 @@ def fetch_users():
         except ValueError:
             return jsonify('Bad request: either page or amount is not an integer'), 400
     return jsonify('Bad request: either page or amount is missing'), 400
+
+
+@app.route('/api/v1/get_user_stats', methods=['GET'])
+def get_user_stats():
+    user_id = request.args.get('id')
+    date_from = request.args.get('from')
+    date_to = request.args.get('to')
+    if user_id and date_from and date_to:
+        try:
+            return jsonify(get_user_stats_between_two_dates(int(user_id), date_from, date_to))
+        except ValueError:
+            return jsonify("Bad request: user_id must be integer"), 400
+    return jsonify("Bad request: either user_id or date_from or date_to is missing"), 400

@@ -1,7 +1,7 @@
 import sqlite3
 import json
 from users.date_validator import validate_date_format
-from users.prettify_db_output import prettify_output
+from users.utils import prettify_pagination_output, prettify_user_stats
 from users import app
 
 
@@ -83,7 +83,7 @@ def get_data_from_db_per_page(amount_on_page: int, page_number: int) -> list:
                                       """,
                                       (amount_on_page, (page_number-1)*amount_on_page)
                                       ).fetchmany(amount_on_page)
-    json_result = prettify_output(query_result)
+    json_result = prettify_pagination_output(query_result)
 
     return json_result
 
@@ -103,4 +103,5 @@ def get_user_stats_between_two_dates(user_id: int, start_date: str, end_date: st
                                       """,
                                       (user_id, start_date, end_date)
                                       ).fetchall()
-    return query_result
+    json_result = prettify_user_stats(query_result)
+    return json_result
