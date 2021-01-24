@@ -6,7 +6,7 @@ from users.db import (create_tables_if_needed, insert_data_into_tables,
 
 
 @app.before_first_request
-def check_if_tables_exist() -> bool:
+def check_if_tables_exist():
     connection = sqlite3.connect('users/users.db')
     with connection:
         cursor = connection.cursor()
