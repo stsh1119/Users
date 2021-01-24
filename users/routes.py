@@ -48,3 +48,13 @@ def get_user_stats():
         except ValueError:
             return jsonify("Bad request: user_id must be integer"), 400
     return jsonify("Bad request: either user_id or date_from or date_to is missing"), 400
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({'error': 'Not found'}), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    return jsonify({'error': 'Server error'}), 500
